@@ -63,6 +63,7 @@ public class StaticEncoder {
     public void encoding(File rawFile, String encodedFilePath) {
         countFrequency(rawFile);
 
+        StringBuilder stringBuffer = new StringBuilder();
         // initial boundary value
         double low = 0.0;
         double high = 1.0;
@@ -80,7 +81,24 @@ public class StaticEncoder {
                 // update boundary value
                 low = low + left * interval;
                 high = low + right * interval;
+
+                // continuously extract the new code
+                while ((low * 2 >= 1 && high * 2 >= 1) || (low * 2 < 1 && high * 2 < 1)) {
+                    if ((low * 2 >= 1 && high * 2 >= 1)) {
+                        stringBuffer.append(1);
+                        low = low * 2 - 1;
+                        high = high * 2 - 1;
+                    } else {
+                        stringBuffer.append(0);
+                        low = low * 2;
+                        high = high * 2;
+                    }
+                }
             }
+
+            // the last symbol make corresponding decimal h satisfy: low <= h <= high
+            stringBuffer.append(1);
+
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,7 +107,7 @@ public class StaticEncoder {
         // write the compression code to a file
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(encodedFilePath)));
-            bufferedWriter.write("low:" + low + ", high:" + high);
+            bufferedWriter.write(stringBuffer.toString());
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -8,5 +8,4 @@ public class Main {
         StaticEncoder staticEncoder = new StaticEncoder();
         staticEncoder.encoding(file, "data/decoded/res_test.txt");
     }
-    
 }
