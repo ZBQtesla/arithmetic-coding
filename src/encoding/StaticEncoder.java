@@ -98,8 +98,6 @@ public class StaticEncoder {
 
             // the last symbol make corresponding decimal h satisfy: low <= h <= high
             stringBuffer.append(1);
-
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
