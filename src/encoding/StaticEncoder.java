@@ -61,6 +61,7 @@ public class StaticEncoder {
      * @param encodedFilePath the storage path of the file encoded
      */
     public void encoding(File rawFile, String encodedFilePath) {
+        System.out.println("Encoding...");
         countFrequency(rawFile);
 
         StringBuilder stringBuffer = new StringBuilder();
@@ -103,6 +104,7 @@ public class StaticEncoder {
         }
 
         // write the compression code to a file
+        System.out.println("Encode successfully, write encoded file to " + encodedFilePath);
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(encodedFilePath)));
             bufferedWriter.write(stringBuffer.toString());

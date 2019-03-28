@@ -20,6 +20,7 @@ public class AdaptiveEncoder {
     }
 
     public void encoding(File rawFile, String encodedFilePath) {
+        System.out.println("Encoding...");
         StringBuilder stringBuilder = new StringBuilder();
         double low = 0.0;
         double high = 1.0;
@@ -53,6 +54,7 @@ public class AdaptiveEncoder {
         }
 
         // write the compression code to a file
+        System.out.println("Encode successfully, write encoded file to " + encodedFilePath);
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(encodedFilePath)));
             bufferedWriter.write(stringBuilder.toString());
